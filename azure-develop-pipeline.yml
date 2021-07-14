@@ -1,0 +1,11 @@
+trigger:
+- develop
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Bash@3
+  inputs:
+    filePath: 'scripts/cibuild'
+  displayName: 'Run cibuild script (build and test)'

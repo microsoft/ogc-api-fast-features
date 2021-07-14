@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+pip install -r $(dirname $0)/../requirements_dev.txt
+pre-commit install
+docker-compose build

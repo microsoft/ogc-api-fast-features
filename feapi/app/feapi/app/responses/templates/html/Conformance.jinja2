@@ -1,0 +1,29 @@
+{% include "header.jinja2" %}
+<div id="header-links-container">
+    <a href="{{api_url_base}}/">/</a>
+    <a href="{{api_url_base}}/conformance">/conformance</a>
+</div>
+<div id="page-landing">
+    <div class="title-links-container">
+        <div class="title-container">
+            <h2>{% trans %}Conformance{% endtrans %}</h2>
+        </div>
+        <div class="links-container">
+            {% for link in response.format_links %}
+                <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.type}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="links-container">
+        <ul>
+            {% for link in response.conformsTo %}
+                <li>
+                    <a href="{{link}}">{{link}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% include "footer.jinja2" %}

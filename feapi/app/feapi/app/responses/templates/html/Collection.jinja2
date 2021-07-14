@@ -1,0 +1,145 @@
+{% include "header.jinja2" %}
+<div id="header-links-container">
+    <a href="{{api_url_base}}/">/</a>
+    <a href="{{api_url_base}}/collections">/collections</a>
+    <a href="{{api_url_base}}/collections/{{response.id|urlencode}}">/{{response.id}}</a>
+</div>
+<div id="page-collection">
+    <div class="title-links-container">
+        <div class="title-container">
+            <h2>{{response.title}}</h2>
+        </div>
+        <div class="links-container">
+            {% for link in response.format_links %}
+                <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.type}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if response.description is not none and response.description|length > 0 %}
+        <div class="description-container">
+            <h3>{% trans %}Description{% endtrans %}</h3>
+            {{response.description}}
+        </div>
+    {% endif %}
+
+    {% if response.license is not none and response.license|length > 0 %}
+        <div class="license-container">
+            <h3>{% trans %}License{% endtrans %}</h3>
+            {{response.license}}
+        </div>
+    {% endif %}
+
+    {% if response.keywords is not none and response.keywords|length > 0 %}
+        <div class="keywords-container">
+            <h3>{% trans %}Keywords{% endtrans %}</h3>
+            <span class="keyword">{{response.keywords|join('</span>&nbsp;<span class="keyword">')}}</span>
+        </div>
+    {% endif %}
+
+    {% if response.providers is not none and response.providers|length > 0 %}
+        <div class="providers-container">
+            <h3>{% trans %}Providers{% endtrans %}</h3>
+                <ul>
+                {% for provider in response.providers %}
+                    <li>
+                    <a href="{{provider.url}}">{{provider.name}}</a>
+                    {% if provider.roles is not none and provider.roles|length > 0 %}
+                        <span class="provider-role">{{provider.roles|join('</span>&nbsp;<span class="provider-role">')}}</span>
+                    {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+        </div>
+    {% endif %}
+
+    <div class="extents-container">
+        <h3>{% trans %}Extents{% endtrans %}</h3>
+        <table class="table-subtle highlight-first-cell">
+            {% for bbox in response.extent.spatial.bbox %}
+                <tr>
+                    <td>
+                        {% if loop.index0 == 0 %}
+                            {% trans %}Spatial{% endtrans %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for pos in bbox %}
+                            {{pos}}{{ ", " if not loop.last else "" }}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for interval in response.extent.temporal.interval %}
+                <tr>
+                    <td>
+                        {% if loop.index0 == 0 %}
+                            {% trans %}Temporal{% endtrans %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% for end in interval %}
+                            {% if end is none %}
+                                {% trans %}Unbounded{% endtrans %}
+                            {% else %}
+                                {{end}}
+                            {% endif %}
+                            {{ "/ " if not loop.last else "" }}
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+
+    <div class="items-links-container">
+        <h3>{% trans %}Features Links{% endtrans %}</h3>
+        <div class="links-container">
+            <ul>
+                <li>
+                    <a id="items-link"
+                       href="{{api_url_base}}/collections/{{response.id|urlencode}}/items">
+                        {% trans %}Features{% endtrans %}
+                    </a>
+                </li>
+                <li>
+                    <a id="items-bbox-link"
+                       class="hidden"
+                       href="{{api_url_base}}/collections/{{response.id|urlencode}}/items?bbox=-180,-90,180,90">
+                        {% trans %}Features in map bounds{% endtrans %}
+                    <a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+</div>
+
+<script>
+    mapFeatures(function(data, map) {
+        const bbox = data.extent.spatial.bbox[0];
+        const collectionExtent = L.polygon([
+            [bbox[1], bbox[0]],
+            [bbox[1], bbox[2]],
+            [bbox[3], bbox[2]],
+            [bbox[3], bbox[0]]
+        ]).addTo(map);
+        map.on('moveend', function(e) {
+            const linkElement = document.getElementById("items-bbox-link");
+            const bounds = map.getBounds();
+            linkElement.href = linkElement.href.replace(/(\?bbox=).+$/, "$1" + [
+                bounds.getWest() > -180 ? bounds.getWest() : -180,
+                bounds.getSouth(),
+                bounds.getEast() < 180 ? bounds.getEast() : 180,
+                bounds.getNorth()
+            ].join(","));
+            linkElement.classList.remove("hidden");
+        });
+        map.fitBounds(collectionExtent.getBounds());
+    });
+</script>
+{% include "footer.jinja2" %}

@@ -1,0 +1,21 @@
+repos:
+-   repo: https://github.com/timothycrosley/isort
+    rev: 5.8.0
+    hooks:
+    - id: isort
+-   repo: https://github.com/psf/black
+    rev: 21.5b1
+    hooks:
+    - id: black
+      language_version: python3.8
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+    - id: flake8
+# -   repo: local
+#     hooks:
+    # custom hook, rather than mypy hook, gives more control over mypy parameters
+    # - id: mypy-executor
+    #   name: MyPy Executor
+    #   entry: ./mypy.sh
+    #   language: system

@@ -1,0 +1,32 @@
+{% include "header.jinja2" %}
+<div id="header-links-container">
+    <a href="{{api_url_base}}/">/</a>
+    <a href="{{api_url_base}}/collections">/collections</a>
+</div>
+<div id="page-collections-list">
+    <div class="title-links-container">
+        <div class="title-container">
+            <h2>{% trans %}Collections{% endtrans %}</h2>
+        </div>
+        <div class="links-container">
+            {% for link in response.format_links %}
+                <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.type}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <table class="table-common">
+        <tr>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Type{% endtrans %}</th>
+            <th>{% trans %}Description{% endtrans %}</th>
+        </tr>
+        {% for summary in response.collections %}
+        <tr>
+            <td><a href="{{api_url_base}}/collections/{{summary.id|urlencode}}">{{summary.title}}</a></td>
+            <td>{{summary.itemType.value}}</td>
+            <td>{{summary.description}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% include "footer.jinja2" %}

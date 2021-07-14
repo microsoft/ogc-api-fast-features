@@ -1,0 +1,24 @@
+#page-collection .map-container {
+    margin: 1em 0;
+}
+#page-collection #map {
+    height: 500px;
+    width: 100%;
+}
+#page-collection .features-link-container {
+    margin-top: 1em;
+}
+#page-collection .items-links-container ul {
+    list-style: none;
+    padding: 0;
+}
+#page-collection .keywords-container .keyword {
+    background-color: #faebd7;
+    padding: 0.2em;
+}
+#page-collection .providers-container .provider-role {
+    background-color: #faebd7;
+    padding: 0.2em;
+    display: inline-block;
+    margin: 0.2em 0;
+}

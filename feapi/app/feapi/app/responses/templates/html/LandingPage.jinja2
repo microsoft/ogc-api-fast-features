@@ -1,0 +1,59 @@
+{% include "header.jinja2" %}
+<div id="header-links-container">
+    <a href="{{api_url_base}}/">/</a>
+</div>
+<div id="page-landing">
+    <div class="title-links-container">
+        <div class="title-container">
+            <h2>{{response.title}}</h2>
+        </div>
+        <div class="links-container">
+            {% for link in response.format_links %}
+                <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.type}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if response.description|length > 1 %}
+        <div class="description-container">
+            {{response.description}}
+        </div>
+    {% endif %}
+
+    <h3>{% trans %}OpenAPI{% endtrans %}</h3>
+    <div class="links-container">
+        <ul>
+            {% for link in response.openapi_links %}
+                <li>
+                    <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.title}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <h3>{% trans %}Collections{% endtrans %}</h3>
+    <div class="links-container">
+        <ul>
+            {% for link in response.collection_links %}
+                <li>
+                    <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.title}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <h3>{% trans %}Conformance{% endtrans %}</h3>
+    <div class="links-container">
+        <ul>
+            {% for link in response.conformance_links %}
+                <li>
+                    <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.title}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+</div>
+{% include "footer.jinja2" %}

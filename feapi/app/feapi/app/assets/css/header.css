@@ -1,0 +1,11 @@
+#header-links-container {
+    margin: 0.2em 0;
+    border-bottom: 1px solid #a9a9a9;
+}
+#header-links-container a {
+    color: #a9a9a9;
+}
+#header-links-container a {
+    padding: 0.4em 0.7em;
+    display: inline-block;
+}

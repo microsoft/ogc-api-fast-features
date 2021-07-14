@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+pip install flake8==3.9.2
+cd $(dirname $0)/..
+flake8 .
+scripts/test --no-cache

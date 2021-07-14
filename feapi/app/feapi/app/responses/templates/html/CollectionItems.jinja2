@@ -1,0 +1,89 @@
+{% include "header.jinja2" %}
+<div id="header-links-container">
+    <a href="{{api_url_base}}/">/</a>
+    <a href="{{api_url_base}}/collections">/collections</a>
+    <a href="{{api_url_base}}/collections/{{response.collection_id|urlencode}}">/{{response.collection_id}}</a>
+    <a href="{{api_url_base}}/collections/{{response.collection_id|urlencode}}/items">/items</a>
+</div>
+<div id="page-collection-items">
+    <div class="title-links-container">
+        <div class="title-container">
+            <h2>{% trans %}Collection Items{% endtrans %}</h2>
+        </div>
+        <div class="links-container">
+            {% for link in response.format_links %}
+                <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.type}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    {% if response.has_features() %}
+    <div class="features-fields-container">
+        <div class="title-links-container">
+            <h3>{% trans %}Features{% endtrans %}</h3>
+            <div class="paging-links-container">
+                <div class="page-link page-link-{{ 'active' if response.prev_link else 'inactive' }} page-link-prev">
+                    {% if response.prev_link %}
+                    <a href="{{response.prev_link.href}}" class="link link-{{response.prev_link.rel.value}}">{% trans %}Previous Page{% endtrans %}</a>
+                    {% else %}
+                    {% trans %}Previous Page{% endtrans %}
+                    {% endif %}
+                </div>
+                <div class="page-link page-link-{{ 'active' if response.next_link else 'inactive' }} page-link-next">
+                    {% if response.next_link %}
+                    <a href="{{response.next_link.href}}" class="link link-{{response.next_link.rel.value}}">{% trans %}Next Page{% endtrans %}</a>
+                    {% else %}
+                    {% trans %}Next Page{% endtrans %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="map-table-container">
+            <div id="map" class="dynamic-col"></div>
+            <div class="dynamic-col">
+                <table class="table-common" cellspacing="0">
+                    <tr>
+                        {% for field_name in response.field_names() %}
+                            <th>{{field_name}}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for feature in response.features %}
+                    <tr>
+                        {% for field_name in response.field_names() %}
+                            {% if field_name == response.unique_field_name %}
+                                <td>
+                                    <a class="feature-id-link" href="{{api_url_base}}/collections/{{response.collection_id|urlencode}}/items/{{feature[field_name]|urlencode}}">
+                                        {{feature[field_name]}}
+                                    </a>
+                                </td>
+                            {% else %}
+                                <td>{{feature[field_name]}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    mapFeatures(function(data, map) {
+        const featureLayer = L.geoJSON(data, {
+            onEachFeature: function(feature, layer) {
+                if (feature.properties) { 
+                    layer.bindPopup(Object.keys(feature.properties).map(function(propertyName) {
+                        return propertyName + ": " + (feature.properties[propertyName] || "").toString()
+                    }).join("<br />"));
+                }
+            }
+        })
+        featureLayer.addTo(map);
+        if (data.features.length > 0) {
+            map.fitBounds(featureLayer.getBounds());
+        }
+    });
+</script>
+{% include "footer.jinja2" %}

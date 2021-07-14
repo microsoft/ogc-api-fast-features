@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS neighbourhoods (
+    id SERIAL PRIMARY KEY
+ ,  name VARCHAR(100) NOT NULL UNIQUE
+ ,  boundary GEOMETRY(MULTIPOLYGON, 4326) NOT NULL
+ ,  valid_from TIMESTAMPTZ
+ ,  valid_to TIMESTAMPTZ
+)
+;

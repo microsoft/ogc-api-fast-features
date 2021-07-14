@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e 
+
+docker-compose run loader
+docker-compose exec api curl -q -X POST http://localhost/control/reconfigure > /dev/null

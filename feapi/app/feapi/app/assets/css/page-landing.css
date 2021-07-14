@@ -1,0 +1,7 @@
+#page-landing .links-container ul {
+    list-style: none;
+    padding: 0;
+}
+#page-landing .links-container li:not(:first-child) {
+    padding-top: 0.2em;
+}

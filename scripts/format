@@ -1,0 +1,4 @@
+#!/bin/bash
+
+isort $(dirname $0)/..
+black --config $(dirname $0)/../pyproject.toml ..

@@ -1,0 +1,41 @@
+{% include "header.jinja2" %}
+<div id="header-links-container">
+    <a href="{{api_url_base}}/">/</a>
+    <a href="{{api_url_base}}/collections">/collections</a>
+    <a href="{{api_url_base}}/collections/{{response.collection_id|urlencode}}">/{{response.collection_id}}</a>
+    <a href="{{api_url_base}}/collections/{{response.collection_id|urlencode}}/items">/items</a>
+    <a href="{{api_url_base}}/collections/{{response.collection_id|urlencode}}/items/{{response.feature_id|urlencode}}">/{{response.feature_id}}</a>
+</div>
+<div id="page-feature">
+    <div class="title-links-container">
+        <div class="title-container">
+            <h2 class="feature-id-title">{{response.feature_id}}</h2>
+        </div>
+        <div class="links-container">
+            {% for link in response.format_links %}
+                <a href="{{link.href}}" class="link link-{{link.rel.value}}">{{link.type}}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="map-table-container">
+        <div id="map" class="dynamic-col"></div>
+        <div class="dynamic-col">
+            <table class="table-common" cellspacing="0">
+                {% for key, value in response.properties.items() %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    mapFeatures(function(data, map) {
+        const featureLayer = L.geoJSON(data)
+        featureLayer.addTo(map);
+        map.fitBounds(featureLayer.getBounds());
+    });
+</script>
+{% include "footer.jinja2" %}
