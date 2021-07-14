@@ -1,5 +1,5 @@
 # the following requirements can be installed without a build step on an Alpine base image
-fastapi==0.65.1
+fastapi==0.65.2
 uvicorn==0.13.4
 Jinja2==3.0.1
 iso8601==0.1.14
