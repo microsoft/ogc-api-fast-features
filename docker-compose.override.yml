@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+    loader:
+        build:
+            context: ./feapi/testing/data
+            dockerfile: loader/Dockerfile
+        image: feapi-loader
+        volumes:
+            - ./feapi/testing/data/sql:/sql
+            - ./feapi/testing/data/load:/load
+        env_file: .env-dev
+        depends_on:
+            api:
+                condition: service_healthy
+    api:
+        env_file: .env-dev
+        ports:
+            - 8008:80
+    postgres:
+        ports:
+            - 5432:5432

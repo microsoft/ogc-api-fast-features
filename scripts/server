@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e 
+
+docker-compose build
+docker-compose up -d api
+
+echo "http://localhost:8008/docs"

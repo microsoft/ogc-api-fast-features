@@ -1,0 +1,7 @@
+[flake8]
+max-line-length = 90
+select = C,E,F,W,B,B950
+max-complexity = 9
+
+# Error Codes: http://pycdestyle.pycqa.org/en/latest/intro.html#configuration
+ignore = W503
