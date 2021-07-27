@@ -1,4 +1,4 @@
-# feapi
+# ogc-api-fast-features
 
 OGC Features API implementation built in Python using [FastAPI](https://fastapi.tiangolo.com/), compliant with [OGC API - Features - Part 1: Core](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html), and inspired by [pygeoapi](https://pygeoapi.io/).
 
@@ -203,20 +203,6 @@ The test database instance and tests can execute alongside a running instance of
     ]
 }
 ```
-
-# Next Steps
-The following list identifies (in no particular or prioritised order) work that is expected or required in upcoming development phases. Once a public repo is available for this project this list can be converted to Feature Requests in the issues list and no longer needs to live in this document.
-* Configure a dependency on a released version of pygeofilter that incorporates Sparkgeo's PRs and remove the manual step from requirements_dev.txt
-* Implement mypy type validation support in pre-commit hooks and `scripts/cibuild`
-* Support a wider range of PostgreSQL temporal field types as described [here](#temporal-types)
-* Support at least one additional input data source type
-* Support at least one additional output encoding
-* Benchmark performance against other OGC API - Features implementations with identical data configurations
-* Support OGC API - Features - Part 2
-* Support OGC API - Features - Part 3
-* Support PostgreSQL/PostGIS views in addition to tables
-    * The main obstacle to support is likely to be difficulties identifying a suitable unique field in each view, as a view is not required to have a Primary Key. It may be possible to provide this information via `feapi.collections` or an alternate metadata entity within the `feapi` schema
-
 
 # Contributing
 
