@@ -7,7 +7,7 @@ with open("README.md") as f:
 
 inst_reqs = [
     "pydantic==1.8.2",
-    "pygeofilter",
+    "pygeofilter==0.0.2",
 ]
 extra_reqs = {
     "test": ["pytest"],

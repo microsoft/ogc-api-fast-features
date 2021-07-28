@@ -4,6 +4,7 @@ gunicorn==20.1.0
 uvloop==0.15.2
 httptools==0.2.0
 pyproj==2.6.1
+pygeofilter==0.0.2
 
 # postgresql data source deps
 psycopg2==2.8.6
