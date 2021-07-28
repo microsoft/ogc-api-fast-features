@@ -99,7 +99,6 @@ The following provides information for developers looking to maintain or extend 
 
 ## Commands
 - `scripts/setup`: configure local dev env (Python virtual env recommended)
-    - **see note** in `requirements_dev.txt` regarding pygeofilter; this currently requires a manual configuration step
 - `scripts/server`: build and start API containers
 - `scripts/demo_data`: load test/demo data for development and refresh API configuration
 - `scripts/stop`: stop API containers
@@ -126,8 +125,6 @@ Thanks in part to FastAPI's use of async feapi is end-to-end async when respondi
 
 ## Pygeofilter
 feapi depends on [pygeofilter](https://github.com/geopython/pygeofilter) to translate spatial and temporal data request parameters into an abstract query structure, and then from that abstract structure into PostgreSQL-compatible SqlAlchemy query objects. In Part 1 (Core) of the OGC API - Features specification only basic spatial and temporal filters are required, and pygeofilter is able to support those requirements. pygeofilter also has developing support for Simple CQL as described in [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288) and when feapi extends to CQL support pygeofilter is expected to provide much of that functionality.
-
-This project currently depends on a [Sparkgeo clone of pygeofilter](https://github.com/sparkgeo/pygeofilter). Sparkgeo has several PRs currently pending on [the upstream repository](https://github.com/geopython/pygeofilter) and once these PRs are merged the Sparkgeo fork should no longer be required. At that point a dependency can be added to the pypi release of pygeofilter that includes those PRs and the manual step can be removed from `requirements_dev.txt`
 
 ## Data Sources
 During startup the data interrogation phase creates an object whose class extends the `DataSource` base class for each of the configured data sources. Each `DataSource` is required to implement a number of methods including `get_layers`. In order to support additional data source types new `DataSource` sub-classes will be required.
