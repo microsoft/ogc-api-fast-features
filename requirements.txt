@@ -5,6 +5,7 @@ Jinja2==3.0.1
 iso8601==0.1.14
 pytz==2021.1
 aiofiles==0.7.0
+pyproj==2.6.1
 
 # postgresql data source deps
 databases==0.4.3

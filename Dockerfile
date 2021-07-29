@@ -1,17 +1,11 @@
 
-FROM osgeo/gdal:alpine-normal-3.3.0
+FROM python:3.8-slim
 
-COPY requirements_build.txt /requirements_build.txt
-RUN apk add --no-cache --update py3-pip py3-psycopg2
-# OS dependencies only required to build certain Python dependencies
-RUN apk add --no-cache --update --virtual .build-deps gcc libc-dev make python3-dev \
-  && pip install -r /requirements_build.txt \
-  && apk del .build-deps
-RUN rm /requirements_build.txt
+RUN apt-get update && apt-get -y install python3-pip python3-psycopg2 libpq-dev
+RUN rm -rf /var/lib/apt/lists/*
+
 # OS dependencies required at runtime
-RUN apk add --no-cache --update \
-  bash \
-  curl
+RUN apt-get update && apt-get install -y curl
 
 COPY requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
