@@ -10,7 +10,6 @@ inst_reqs = [
     "gunicorn==20.1.0",
     "uvloop==0.15.2",
     "httptools==0.2.0",
-    "pyproj==2.6.1",
     "pygeofilter==0.0.2",
     "psycopg2==2.8.6",
     "asyncpg==0.23.0",
