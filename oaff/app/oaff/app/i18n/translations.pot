@@ -1,0 +1,125 @@
+# Translations template for PROJECT.
+# Copyright (C) 2021 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2021-07-13 20:59-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: oaff/app/oaff/app/request_handlers/landing_page.py:23
+msgid "Features API Landing Page"
+msgstr ""
+
+#: oaff/app/oaff/app/request_handlers/landing_page.py:31
+#, python-format
+msgid "API Definition (%s)text/html"
+msgstr ""
+
+#: oaff/app/oaff/app/request_handlers/landing_page.py:37
+#, python-format
+msgid "API Definition (%s)"
+msgstr ""
+
+#: oaff/app/oaff/app/request_handlers/landing_page.py:50
+#, python-format
+msgid "Conformance (%s)"
+msgstr ""
+
+#: oaff/app/oaff/app/request_handlers/landing_page.py:64
+#, python-format
+msgid "Collections (%s)"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:21
+#: oaff/app/oaff/app/responses/templates/html/CollectionsList.jinja2:21
+msgid "Description"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:28
+msgid "License"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:35
+msgid "Keywords"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:42
+msgid "Providers"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:57
+msgid "Extents"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:63
+msgid "Spatial"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:77
+msgid "Temporal"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:83
+msgid "Unbounded"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:97
+msgid "Features Links"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:103
+#: oaff/app/oaff/app/responses/templates/html/CollectionItems.jinja2:22
+msgid "Features"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Collection.jinja2:110
+msgid "Features in map bounds"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/CollectionItems.jinja2:11
+msgid "Collection Items"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/CollectionItems.jinja2:26
+#: oaff/app/oaff/app/responses/templates/html/CollectionItems.jinja2:28
+msgid "Previous Page"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/CollectionItems.jinja2:33
+#: oaff/app/oaff/app/responses/templates/html/CollectionItems.jinja2:35
+msgid "Next Page"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/CollectionsList.jinja2:9
+#: oaff/app/oaff/app/responses/templates/html/LandingPage.jinja2:35
+msgid "Collections"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/CollectionsList.jinja2:19
+msgid "Name"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/CollectionsList.jinja2:20
+msgid "Type"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/Conformance.jinja2:9
+#: oaff/app/oaff/app/responses/templates/html/LandingPage.jinja2:46
+msgid "Conformance"
+msgstr ""
+
+#: oaff/app/oaff/app/responses/templates/html/LandingPage.jinja2:23
+msgid "OpenAPI"
+msgstr ""
+

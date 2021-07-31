@@ -3,6 +3,6 @@
 set -e
 
 cd $(dirname $0)/..
-pybabel extract --mapping babel.cfg --output-file=feapi/app/feapi/app/i18n/translations.pot .
-pybabel update --domain=translations --input-file=feapi/app/feapi/app/i18n/translations.pot --output-dir=feapi/app/feapi/app/i18n/locale
-pybabel compile --domain=translations --directory=feapi/app/feapi/app/i18n/locale --use-fuzzy
+pybabel extract --mapping babel.cfg --output-file=oaff/app/oaff/app/i18n/translations.pot .
+pybabel update --domain=translations --input-file=oaff/app/oaff/app/i18n/translations.pot --output-dir=oaff/app/oaff/app/i18n/locale
+pybabel compile --domain=translations --directory=oaff/app/oaff/app/i18n/locale --use-fuzzy
