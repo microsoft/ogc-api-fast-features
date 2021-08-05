@@ -16,8 +16,8 @@ RUN pip install -r requirements.txt --no-cache-dir
 RUN rm requirements.txt
 
 WORKDIR /
-COPY ./feapi /feapi
-RUN pip install -e /feapi/app
+COPY ./oaff /oaff
+RUN pip install -e /oaff/app
 
 
-CMD ["gunicorn", "-c", "/feapi/fastapi/gunicorn/gunicorn.conf.py", "feapi.fastapi.api.main:app", "--timeout", "185"]
+CMD ["gunicorn", "-c", "/oaff/fastapi/gunicorn/gunicorn.conf.py", "oaff.fastapi.api.main:app", "--timeout", "185"]
