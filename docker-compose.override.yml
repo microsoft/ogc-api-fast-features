@@ -2,12 +2,12 @@ version: '2.1'
 services:
     loader:
         build:
-            context: ./feapi/testing/data
+            context: ./oaff/testing/data
             dockerfile: loader/Dockerfile
-        image: feapi-loader
+        image: oaff-loader
         volumes:
-            - ./feapi/testing/data/sql:/sql
-            - ./feapi/testing/data/load:/load
+            - ./oaff/testing/data/sql:/sql
+            - ./oaff/testing/data/load:/load
         env_file: .env-dev
         depends_on:
             api:

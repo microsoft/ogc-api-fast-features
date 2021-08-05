@@ -1,3 +1,3 @@
 #!/bin/sh
 
-mypy --namespace-packages -p feapi
+mypy --namespace-packages -p oaff

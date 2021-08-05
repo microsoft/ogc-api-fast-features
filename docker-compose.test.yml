@@ -2,18 +2,18 @@ version: '2.1'
 services:
     loader:
         build:
-            context: ./feapi/testing
-        image: feapi-tester
+            context: ./oaff/testing
+        image: oaff-tester
         depends_on:
             api:
                 condition: service_healthy
         environment:
             PGPASSWORD: postgres
-        command: psql -U postgres -h postgres -d postgres -f /feapi/testing/data/sql/schema/schema_management.sql
+        command: psql -U postgres -h postgres -d postgres -f /oaff/testing/data/sql/schema/schema_management.sql
     api:
         build:
-            context: ./feapi/testing
-        image: feapi-tester
+            context: ./oaff/testing
+        image: oaff-tester
         env_file: .env-integration-tests
     postgres:
         ports:
