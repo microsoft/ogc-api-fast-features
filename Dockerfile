@@ -10,14 +10,11 @@ RUN apt-get update && apt-get install -y \
       curl \ 
   && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /opt/$NAME
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt --no-cache-dir
-RUN rm requirements.txt
-
-WORKDIR /
-COPY ./oaff /oaff
-RUN pip install -e /oaff/app
+WORKDIR /opt/ogc-api-fast-features
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY oaff oaff
+RUN pip install -e oaff/app
 
 
 CMD ["gunicorn", "-c", "/oaff/fastapi/gunicorn/gunicorn.conf.py", "oaff.fastapi.api.main:app", "--timeout", "185"]
