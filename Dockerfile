@@ -1,35 +1,20 @@
-FROM alpine/git:v2.30.2 AS getter
 
-RUN mkdir /pygeofilter
-WORKDIR /pygeofilter
-# switch to geopython/pygeofilter once bug fixes are merged via PR
-RUN git clone --single-branch --branch main https://github.com/sparkgeo/pygeofilter.git
-WORKDIR /pygeofilter/pygeofilter
-RUN git checkout 5cfa8afbb6ffc8a30b8dde5be7a2981d4b534678
+FROM python:3.8-slim
 
+RUN apt-get update && apt-get install -y \
+      # OS dependencies only required to build certain Python dependencies
+      libpq-dev \
+      python3-pip \
+      python3-psycopg2 \
+      # OS dependency required at runtime
+      curl \ 
+  && rm -rf /var/lib/apt/lists/*
 
-FROM osgeo/gdal:alpine-normal-3.3.0
-
-COPY requirements_build.txt /requirements_build.txt
-COPY --from=getter /pygeofilter /
-RUN apk add --no-cache --update py3-pip py3-psycopg2
-# OS dependencies only required to build certain Python dependencies
-RUN apk add --no-cache --update --virtual .build-deps gcc libc-dev make python3-dev \
-  && pip install -r /requirements_build.txt \
-  && pip install -e /pygeofilter \
-  && apk del .build-deps
-RUN rm /requirements_build.txt
-# OS dependencies required at runtime
-RUN apk add --no-cache --update \
-  bash \
-  curl
-
-COPY requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-RUN rm /requirements.txt
-
-COPY ./oaff /oaff
-RUN pip install -e /oaff/app
+WORKDIR /opt/ogc-api-fast-features
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY oaff oaff
+RUN pip install -e oaff/app
 
 
 CMD ["gunicorn", "-c", "/oaff/fastapi/gunicorn/gunicorn.conf.py", "oaff.fastapi.api.main:app", "--timeout", "185"]

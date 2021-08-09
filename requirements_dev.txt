@@ -19,12 +19,6 @@ aiofiles==0.7.0
 beautifulsoup4==4.9.3
 pyproj==2.6.1
 
-# not yet available pypi
-# must be installed in local env from source with pip install -e /path/to/repo
-# clone from https://github.com/sparkgeo/pygeofilter.git
-# once pygeofilter is availble in pypi remove this entry and replace with a dependency in setup.py
-pygeofilter
-
 # postgresql data source deps
 databases==0.4.3
 SQLAlchemy==1.3.24

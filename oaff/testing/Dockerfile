@@ -1,10 +1,12 @@
 FROM oaff
 
-RUN apk add --no-cache --update postgresql-client
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgresql-client-11 \
+  && rm -rf /var/lib/apt/lists/*
 
-COPY requirements-test.txt /requirements-test.txt
-RUN pip install -r /requirements-test.txt
+COPY requirements-test.txt ./
+RUN pip install --no-cache-dir -r requirements-test.txt
+RUN mkdir -p oaff/testing
+COPY data oaff/testing/data
+COPY integration_tests oaff/testing/integration_tests
 
-RUN mkdir -p /oaff/testing
-COPY data /oaff/testing/data
-COPY integration_tests /oaff/testing/integration_tests

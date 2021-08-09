@@ -6,8 +6,13 @@ with open("README.md") as f:
     long_description = f.read()
 
 inst_reqs = [
-    "pydantic==1.8.2",
-    "pygeofilter",
+    "uvicorn==0.13.4",
+    "gunicorn==20.1.0",
+    "uvloop==0.15.2",
+    "httptools==0.2.0",
+    "pygeofilter==0.0.2",
+    "psycopg2==2.8.6",
+    "asyncpg==0.23.0",
 ]
 extra_reqs = {
     "test": ["pytest"],

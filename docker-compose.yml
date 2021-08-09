@@ -5,7 +5,7 @@ services:
             context: .
         image: oaff
         volumes:
-            - ./oaff:/oaff
+            - ./oaff:/opt/ogc-api-fast-features/oaff
         command: uvicorn --reload --host 0.0.0.0 --port 80 --log-level "info" "oaff.fastapi.api.main:app"
         healthcheck:
             test: curl -s --fail http://localhost/docs || exit 1

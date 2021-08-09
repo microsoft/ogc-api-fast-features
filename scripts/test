@@ -6,7 +6,7 @@ cd $(dirname $0)/..
 docker-compose build $1 api # $1 for --no-cache parameter passed by scripts/cibuild
 dco_test build $1
 dco_test up -d
-dco_test exec -T api python -m pytest /oaff
+dco_test exec -T api python -m pytest oaff
 EXIT_CODE=$?
 dco_test down
 
