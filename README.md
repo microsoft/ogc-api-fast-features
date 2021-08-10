@@ -95,7 +95,7 @@ Follow the instructions [here](https://cite.opengeospatial.org/teamengine/) to e
     * Note the lack of a trailing slash. There appears to be an error in the CITE tests that results in invalid request paths (e.g. `///conformance`) if the test URL ends in a trailing slash
 
 # Developing
-The following provides information for developers looking to maintain or extend oaff. Development requires Python 3.8.
+The following provides information for developers looking to maintain or extend oaff. Development requires Python 3.8+.
 
 ## Commands
 - `scripts/setup`: configure local dev env (Python virtual env recommended)
