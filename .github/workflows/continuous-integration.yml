@@ -54,7 +54,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: /Dockerfile
+          file: Dockerfile
           target: main
           # Don't try to push if the event is a PR from a fork
           push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
