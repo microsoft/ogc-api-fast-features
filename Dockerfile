@@ -1,5 +1,5 @@
 
-FROM python:3.8-slim
+FROM python:3.8-slim-bullseye
 
 RUN apt-get update && apt-get install -y \
       # OS dependencies only required to build certain Python dependencies
@@ -17,4 +17,4 @@ COPY oaff oaff
 RUN pip install -e oaff/app
 
 
-CMD ["gunicorn", "-c", "/oaff/fastapi/gunicorn/gunicorn.conf.py", "oaff.fastapi.api.main:app", "--timeout", "185"]
+CMD ["gunicorn", "-c", "/opt/ogc-api-fast-features/oaff/fastapi/gunicorn/gunicorn.conf.py", "oaff.fastapi.api.main:app", "--timeout", "185"]
