@@ -1,7 +1,7 @@
 FROM oaff
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client-11 \
+    postgresql-client \
   && rm -rf /var/lib/apt/lists/*
 
 COPY requirements-test.txt ./
