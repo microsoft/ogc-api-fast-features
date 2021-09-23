@@ -1,13 +1,12 @@
 from datetime import datetime
 from logging import getLogger
-from typing import Final, Optional, Tuple, Union
+from typing import Final, Optional, Tuple, Union, cast
 from urllib.parse import quote
 
 import iso8601
 import pytz
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from fastapi.param_functions import Depends
-from fastapi.params import Query
 from fastapi.requests import Request
 
 from oaff.app.requests.collection import Collection as CollectionRequestType
@@ -216,7 +215,7 @@ def _process_datetime(
             raise HTTPException(
                 status_code=400, detail="datetime start cannot be after end"
             )
-    return tuple(result)
+    return cast(Union[Tuple[datetime], Tuple[datetime, datetime]], tuple(result))
 
 
 def _get_safe_url(path_template: str, request: Request, root: str) -> str:

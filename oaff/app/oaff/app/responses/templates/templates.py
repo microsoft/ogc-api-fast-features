@@ -13,7 +13,7 @@ def get_rendered_html(template_name: str, data: object, locale: Locales) -> str:
         loader=PackageLoader("oaff.app", path.join("responses", "templates", "html")),
         autoescape=select_autoescape(["html"]),
     )
-    env.install_gettext_translations(get_translations_for_locale(locale))
+    env.install_gettext_translations(get_translations_for_locale(locale))  # type: ignore
     frontend_config = get_frontend_configuration()
     return env.get_template(f"{template_name}.jinja2").render(
         response=data,

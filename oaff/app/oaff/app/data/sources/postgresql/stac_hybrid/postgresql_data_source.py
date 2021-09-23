@@ -2,7 +2,7 @@ from datetime import date, datetime
 from hashlib import sha256
 from logging import getLogger
 from os import path
-from typing import Any, Coroutine, Dict, Final, List, Type
+from typing import Any, Awaitable, Callable, Dict, Final, List, Type
 
 # geoalchemy import required for sa.MetaData reflection, even though unused in module
 import geoalchemy2 as ga  # noqa: F401
@@ -51,7 +51,7 @@ class PostgresqlDataSource(DataSource):
     def __init__(
         self,
         connection_name: str,
-        connection_tester: Coroutine[None, None, Database],
+        connection_tester: Callable[[Database, str], Awaitable[None]],
     ):
         super().__init__(f"{self.DATA_SOURCE_NAME}:{connection_name}")
         self.db = Database(settings.url(connection_name))
@@ -155,7 +155,7 @@ class PostgresqlDataSource(DataSource):
     async def get_feature_set_provider(
         self,
         layer: PostgresqlLayer,
-        constraints: ItemConstraints = None,
+        constraints: ItemConstraints,
         ast: Type[Node] = None,
     ) -> Type[FeatureSetProvider]:
         filters = (
@@ -223,7 +223,7 @@ class PostgresqlDataSource(DataSource):
                 bboxes=[table_spatial_extents[qualified_layer_name]],
                 intervals=table_temporal_extents[qualified_layer_name]
                 if qualified_layer_name in table_temporal_extents
-                else [[None, None]],
+                else [None, None],
                 data_source_id=self.id,
                 schema_name=tables[qualified_layer_name]["schema_name"],
                 table_name=tables[qualified_layer_name]["table_name"],
@@ -414,8 +414,8 @@ class PostgresqlDataSource(DataSource):
         self,
         table_models: Dict[str, sa.Table],
         table_temporal_fields: Dict[str, List[TemporalInstant]],
-    ) -> Dict[str, List[datetime]]:
-        table_temporal_extents = {}
+    ) -> Dict[str, List[List[datetime]]]:
+        table_temporal_extents = {}  # type: ignore
         for qualified_table_name, temporal_fields in table_temporal_fields.items():
             start = None
             end = None

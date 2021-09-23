@@ -7,7 +7,7 @@ from oaff.app.responses.response import Response
 from oaff.app.responses.response_format import ResponseFormat
 
 
-class Conformance(RequestHandler):
+class Conformance(RequestHandler):  # type: ignore[no-redef]
     @classmethod
     def type_name(cls) -> str:
         return Conformance.__name__

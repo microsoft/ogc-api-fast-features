@@ -12,7 +12,7 @@ from oaff.app.responses.response_format import ResponseFormat
 LOGGER: Final = getLogger(__file__)
 
 
-class CollectionsList(RequestHandler):
+class CollectionsList(RequestHandler):  # type: ignore[no-redef]
     @classmethod
     def type_name(cls) -> str:
         return CollectionsList.__name__
