@@ -115,7 +115,7 @@ The following provides information for developers looking to maintain or extend 
 ## Architecture
 
 ## Pre-commit hooks
-Git hooks are used to run formatting (isort, black), linting (flake8), and type-checking (mypy). You can install the pre-commit scripts with `pre-commit install`. Thereafter, the scripts defined in `.pre-commit-config.yaml` will be run on the files included in a commit. Specific tool configurations are included in `pyproject.toml`.
+Git hooks are used to run formatting (isort, black), linting (flake8), and type-checking (mypy). The pre-commit scripts can be installed by running `scripts/setup` or simply `pre-commit install`. Thereafter, the scripts defined in `.pre-commit-config.yaml` will be run on the files included in a commit. Specific tool configurations are included in `pyproject.toml`.
 
 ### FastAPI
 oaff's frontend uses FastAPI but the backend is not tightly-coupled to that framework. Frontend routers interpret path and query parameters and build request objects using request classes defined in the backend. A single `delegate` method passes request objects to the backend and awaits a response. Responses provide either data or error detail and an appropriate API response is constructed from whichever is returned. During the frontend's startup sequence a `FrontendConfiguration` object is passed to the backend, providing key frontend properties that need to be known by the backend. Examples:
