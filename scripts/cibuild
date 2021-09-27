@@ -5,5 +5,5 @@ set -e
 pip install flake8==3.9.2 mypy==0.910
 cd $(dirname $0)/..
 flake8 .
-mypy -p oaff
+mypy .
 scripts/test --no-cache
