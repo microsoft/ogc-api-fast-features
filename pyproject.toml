@@ -1,6 +1,5 @@
 [tool.black]
 line-length = 90
-py38 = true
 include = '\.pyi?$'
 exclude = '''
 
@@ -33,3 +32,10 @@ known_first_party='sample_lib'
 indent=4
 sections='FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER'
 no_lines_before='LOCALFOLDER'
+
+[tool.mypy]
+exclude="^(tests|testing)$"
+namespace_packages=true
+explicit_package_bases=true
+ignore_missing_imports=true
+ignore_errors=true
