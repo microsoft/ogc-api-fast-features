@@ -39,3 +39,5 @@ namespace_packages=true
 explicit_package_bases=true
 ignore_missing_imports=true
 ignore_errors=true
+install_types=true
+non_interactive=true
