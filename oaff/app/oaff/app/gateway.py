@@ -7,15 +7,11 @@ from oaff.app.request_handlers.collection import Collection as CollectionRequest
 from oaff.app.request_handlers.collection_items import (
     CollectionsItems as CollectionsItemsRequestHandler,
 )
-from oaff.app.request_handlers.collections_list import (
-    CollectionsList as CollectionsListRequestHandler,
-)
+from oaff.app.request_handlers.collections_list import CollectionsListRequestHandler
 from oaff.app.request_handlers.common.request_handler import RequestHandler
-from oaff.app.request_handlers.conformance import Conformance as ConformanceRequestHandler
+from oaff.app.request_handlers.conformance import ConformanceRequestHandler
 from oaff.app.request_handlers.feature import Feature as FeatureRequestHandler
-from oaff.app.request_handlers.landing_page import (
-    LandingPage as LandingPageRequestHandler,
-)
+from oaff.app.request_handlers.landing_page import LandingPageRequestHandler
 from oaff.app.requests.common.request_type import RequestType
 from oaff.app.responses.response import Response
 

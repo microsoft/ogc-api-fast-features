@@ -1,18 +1,18 @@
 from typing import Type
 
 from oaff.app.request_handlers.common.request_handler import RequestHandler
-from oaff.app.requests.conformance import Conformance
+from oaff.app.requests.conformance import Conformance as ConformanceRequest
 from oaff.app.responses.models.conformance import ConformanceHtml, ConformanceJson
 from oaff.app.responses.response import Response
 from oaff.app.responses.response_format import ResponseFormat
 
 
-class Conformance(RequestHandler):  # type: ignore[no-redef]
+class ConformanceRequestHandler(RequestHandler):  # type: ignore[no-redef]
     @classmethod
     def type_name(cls) -> str:
-        return Conformance.__name__
+        return ConformanceRequest.__name__
 
-    async def handle(self, request: Conformance) -> Type[Response]:
+    async def handle(self, request: ConformanceRequest) -> Type[Response]:
         conform_list = [
             "http://www.opengis.net/spec/ogcapi-common-1/1.0/conf/core",
             "http://www.opengis.net/spec/ogcapi-common-2/1.0/conf/collections",

@@ -13,9 +13,7 @@ from oaff.app.requests.collection import Collection as CollectionRequestType
 from oaff.app.requests.collection_items import (
     CollectionItems as CollectionItemsRequestType,
 )
-from oaff.app.requests.collections_list import (
-    CollectionsList as CollectionsListRequestType,
-)
+from oaff.app.requests.collections_list import CollectionsList as CollectionsListRequest
 from oaff.app.requests.feature import Feature as FeatureRequestType
 from oaff.app.responses.response_type import ResponseType
 from oaff.fastapi.api import settings
@@ -41,7 +39,7 @@ async def get_collections_list(
 ):
     enforce_strict(request)
     return await delegate(
-        CollectionsListRequestType(
+        CollectionsListRequest(
             type=ResponseType.METADATA,
             format=common_parameters.format,
             locale=common_parameters.locale,
