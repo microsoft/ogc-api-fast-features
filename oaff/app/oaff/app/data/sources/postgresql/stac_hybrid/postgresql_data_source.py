@@ -223,7 +223,7 @@ class PostgresqlDataSource(DataSource):
                 bboxes=[table_spatial_extents[qualified_layer_name]],
                 intervals=table_temporal_extents[qualified_layer_name]
                 if qualified_layer_name in table_temporal_extents
-                else [None, None],
+                else [[None, None]],
                 data_source_id=self.id,
                 schema_name=tables[qualified_layer_name]["schema_name"],
                 table_name=tables[qualified_layer_name]["table_name"],
