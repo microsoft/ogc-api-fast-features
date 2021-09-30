@@ -415,7 +415,7 @@ class PostgresqlDataSource(DataSource):
         table_models: Dict[str, sa.Table],
         table_temporal_fields: Dict[str, List[TemporalInstant]],
     ) -> Dict[str, List[List[datetime]]]:
-        table_temporal_extents = {}  # type: ignore
+        table_temporal_extents: Dict[str, List[List[datetime]]] = {}
         for qualified_table_name, temporal_fields in table_temporal_fields.items():
             start = None
             end = None
