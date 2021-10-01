@@ -12,7 +12,7 @@ from oaff.app.responses.response_type import ResponseType
 from oaff.app.settings import OPENAPI_OGC_TYPE
 
 
-class LandingPageRequestHandler(RequestHandler):  # type: ignore[no-redef]
+class LandingPageRequestHandler(RequestHandler):
     @classmethod
     def type_name(cls) -> str:
         return LandingPageRequest.__name__
