@@ -4,7 +4,7 @@ from typing import Final
 from fastapi import APIRouter, Depends
 from fastapi.requests import Request
 
-from oaff.app.requests.conformance import Conformance as ConformanceRequestType
+from oaff.app.requests.conformance import Conformance as ConformanceRequest
 from oaff.app.responses.response_type import ResponseType
 from oaff.fastapi.api import settings
 from oaff.fastapi.api.delegator import delegate, get_default_handler
@@ -24,7 +24,7 @@ async def root(
 ):
     enforce_strict(request)
     return await delegate(
-        ConformanceRequestType(
+        ConformanceRequest(
             type=ResponseType.METADATA,
             format=common_parameters.format,
             url=str(request.url),

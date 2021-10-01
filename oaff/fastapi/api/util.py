@@ -57,8 +57,8 @@ def _change_page(url: str, forward: bool) -> str:
                 for key, value in {
                     **parameters,
                     **{
-                        "offset": max(offset + limit * (1 if forward else -1), 0),
-                        "limit": limit,
+                        "offset": str(max(offset + limit * (1 if forward else -1), 0)),
+                        "limit": str(limit),
                     },
                 }.items()
             ]

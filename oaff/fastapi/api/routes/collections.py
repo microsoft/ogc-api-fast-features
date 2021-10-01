@@ -1,22 +1,19 @@
 from datetime import datetime
 from logging import getLogger
-from typing import Final, Optional, Tuple, Union
+from typing import Final, Optional, Tuple, Union, cast
 from urllib.parse import quote
 
 import iso8601
 import pytz
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from fastapi.param_functions import Depends
-from fastapi.params import Query
 from fastapi.requests import Request
 
 from oaff.app.requests.collection import Collection as CollectionRequestType
 from oaff.app.requests.collection_items import (
     CollectionItems as CollectionItemsRequestType,
 )
-from oaff.app.requests.collections_list import (
-    CollectionsList as CollectionsListRequestType,
-)
+from oaff.app.requests.collections_list import CollectionsList as CollectionsListRequest
 from oaff.app.requests.feature import Feature as FeatureRequestType
 from oaff.app.responses.response_type import ResponseType
 from oaff.fastapi.api import settings
@@ -42,7 +39,7 @@ async def get_collections_list(
 ):
     enforce_strict(request)
     return await delegate(
-        CollectionsListRequestType(
+        CollectionsListRequest(
             type=ResponseType.METADATA,
             format=common_parameters.format,
             locale=common_parameters.locale,
@@ -216,7 +213,7 @@ def _process_datetime(
             raise HTTPException(
                 status_code=400, detail="datetime start cannot be after end"
             )
-    return tuple(result)
+    return cast(Union[Tuple[datetime], Tuple[datetime, datetime]], tuple(result))
 
 
 def _get_safe_url(path_template: str, request: Request, root: str) -> str:

@@ -1,5 +1,5 @@
 from re import compile, search, sub
-from typing import Final, Optional, Set
+from typing import Final, List, Optional
 
 from fastapi import Header, Query
 from fastapi.requests import Request
@@ -66,7 +66,7 @@ class CommonParameters(BaseModel):
         )
 
     @classmethod
-    def _header_options_by_preference(cls, header_value: str) -> Set[str]:
+    def _header_options_by_preference(cls, header_value: str) -> List[str]:
         options = list(
             filter(
                 lambda option: len(option) > 0,

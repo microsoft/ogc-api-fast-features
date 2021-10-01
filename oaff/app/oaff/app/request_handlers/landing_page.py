@@ -3,7 +3,7 @@ from typing import Type
 from oaff.app.configuration.frontend_interface import get_frontend_configuration
 from oaff.app.i18n.translations import gettext_for_locale
 from oaff.app.request_handlers.common.request_handler import RequestHandler
-from oaff.app.requests.landing_page import LandingPage
+from oaff.app.requests.landing_page import LandingPage as LandingPageRequest
 from oaff.app.responses.models.landing import LandingHtml, LandingJson
 from oaff.app.responses.models.link import Link, LinkRel
 from oaff.app.responses.response import Response
@@ -12,12 +12,12 @@ from oaff.app.responses.response_type import ResponseType
 from oaff.app.settings import OPENAPI_OGC_TYPE
 
 
-class LandingPage(RequestHandler):
+class LandingPageRequestHandler(RequestHandler):
     @classmethod
     def type_name(cls) -> str:
-        return LandingPage.__name__
+        return LandingPageRequest.__name__
 
-    async def handle(self, request: LandingPage) -> Type[Response]:
+    async def handle(self, request: LandingPageRequest) -> Type[Response]:
         gettext = gettext_for_locale(request.locale)
         frontend = get_frontend_configuration()
         title = gettext("Features API Landing Page")

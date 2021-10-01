@@ -6,5 +6,5 @@ from oaff.app.data.sources.common.data_source import DataSource
 
 class DataSourceManager(ABC):
     @abstractmethod
-    def get_data_sources() -> List[Type[DataSource]]:
+    def get_data_sources(self) -> List[Type[DataSource]]:
         pass

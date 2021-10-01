@@ -3,7 +3,7 @@ from enum import Enum
 from oaff.app.responses.response_type import ResponseType
 
 
-class ResponseFormat(dict, Enum):
+class ResponseFormat(dict, Enum):  # type: ignore[misc]
     html = {
         ResponseType.DATA: "text/html",
         ResponseType.METADATA: "text/html",

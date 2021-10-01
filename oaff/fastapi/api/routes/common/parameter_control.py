@@ -7,7 +7,8 @@ from fastapi.requests import Request
 from oaff.fastapi.api.routes.common.common_parameters import COMMON_QUERY_PARAMS
 
 
-def strict(request: Request, permitted: Optional[List[str]] = []) -> None:
+def strict(request: Request, permitted: Optional[List[str]] = None) -> None:
+    permitted = list() if permitted is None else permitted
     excessive = set(request.query_params.keys()).difference(
         set(permitted + COMMON_QUERY_PARAMS)
     )

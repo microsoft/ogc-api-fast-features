@@ -1,6 +1,6 @@
 from typing import Final
 
-from oaff.app.requests.landing_page import LandingPage
+from oaff.app.requests.landing_page import LandingPage as LandingPageRequest
 from oaff.fastapi.api.routes.landing_page import PATH as ROOT_PATH
 from oaff.fastapi.tests import common_delegation as common
 
@@ -24,7 +24,7 @@ def test_basic_defaults(test_app):
     common.test_basic_defaults(
         test_app,
         endpoint_path,
-        LandingPage,
+        LandingPageRequest,
         handler_calls,
     )
 

@@ -34,10 +34,11 @@ sections='FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER'
 no_lines_before='LOCALFOLDER'
 
 [tool.mypy]
-exclude="^(tests|testing)$"
+exclude="^(tests|testing|data|scripts)$"
 namespace_packages=true
 explicit_package_bases=true
 ignore_missing_imports=true
-ignore_errors=true
 install_types=true
 non_interactive=true
+no_warn_no_return=true
+no_strict_optional=true

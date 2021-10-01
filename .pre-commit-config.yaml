@@ -17,3 +17,4 @@ repos:
     hooks:
     - id: mypy
       language_version: python
+      args: [--install-types, --non-interactive]

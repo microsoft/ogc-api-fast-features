@@ -1,5 +1,5 @@
 from datetime import datetime, tzinfo
-from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
+from typing import Any, Callable, Dict, Optional, Tuple, Type, Union, cast
 
 from pygeofilter.ast import (
     And,
@@ -82,7 +82,7 @@ class CollectionsItems(RequestHandler):
 
         frontend_config = get_frontend_configuration()
 
-        def retriever(total_count: int, result_count: int) -> List[Link]:
+        def retriever(total_count: int, result_count: int) -> Dict[PageLinkRel, Link]:
             links = {}
             if request.offset > 0:
                 links[PageLinkRel.PREV] = Link(
@@ -107,7 +107,7 @@ class CollectionsItems(RequestHandler):
         self,
         bbox: BBox,
         datetime: Any,
-    ) -> Type[Node]:
+    ) -> Optional[Type[Node]]:
         if bbox is None and datetime is None:
             return None
         else:
@@ -120,21 +120,23 @@ class CollectionsItems(RequestHandler):
 
     async def _spatial_bounds_to_node(
         self,
-        spatial_bounds: Optional[
-            Union[
-                Tuple[float, float, float, float],
-                Tuple[float, float, float, float, float, float],
-            ]
+        spatial_bounds: Union[
+            Tuple[float, float, float, float],
+            Tuple[float, float, float, float, float, float],
         ],
         spatial_bounds_crs: str,
         data_source: DataSource,
         layer: Layer,
     ) -> BBox:
-        x_min, y_min, x_max, y_max = (
-            spatial_bounds
-            if len(spatial_bounds) == 4
-            else (spatial_bounds[i] for i in [0, 1, 3, 4])
-        )
+        # recommended usage for Union of types
+        # https://github.com/python/mypy/issues/1178#issuecomment-176185607
+        if len(spatial_bounds) == 4:
+            a, b, c, d = cast(Tuple[float, float, float, float], spatial_bounds)
+        else:
+            a, b, _, c, d, _ = cast(
+                Tuple[float, float, float, float, float, float], spatial_bounds
+            )
+        x_min, y_min, x_max, y_max = (a, b, c, d)
         transformer = Transformer.from_crs(
             "EPSG:4326",  # True until Features API spec part 2 is implemented
             f"{layer.geometry_crs_auth_name}:{layer.geometry_crs_auth_code}",
@@ -155,13 +157,13 @@ class CollectionsItems(RequestHandler):
         self,
         temporal_bounds: Union[Tuple[datetime], Tuple[datetime, datetime]],
         layer: Layer,
-    ) -> Type[Node]:
+    ) -> Optional[Type[Node]]:
         if len(list(filter(lambda bound: bound is not None, temporal_bounds))) == 0:
             return None
         nodes = []
         for data_field in layer.temporal_attributes:
             if len(temporal_bounds) == 2:
-                query_start, query_end = temporal_bounds
+                query_start, query_end = cast(Tuple[datetime, datetime], temporal_bounds)
                 if data_field.__class__ is TemporalInstant:
                     if query_start is not None and query_end is not None:
                         nodes.append(
@@ -333,6 +335,6 @@ class CollectionsItems(RequestHandler):
         )
 
     def _match_query_time_to(
-        self, query_time: datetime, tz_aware: bool, tz: Type[tzinfo]
+        self, query_time: datetime, tz_aware: bool, tz: tzinfo
     ) -> datetime:
         return query_time if tz_aware else query_time.astimezone(tz).replace(tzinfo=None)

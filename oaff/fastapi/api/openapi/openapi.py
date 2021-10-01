@@ -1,10 +1,12 @@
+from typing import Callable
+
 from fastapi.applications import FastAPI
 from fastapi.requests import Request
 
 from oaff.fastapi.api.openapi.vnd_response import VndResponse
 
 
-def get_openapi_handler(app: FastAPI) -> VndResponse:
+def get_openapi_handler(app: FastAPI) -> Callable[[Request], VndResponse]:
     def handler(_: Request):
         # OpenAPI spec must be modified because FastAPI doesn't support
         # encoding style: https://github.com/tiangolo/fastapi/issues/283

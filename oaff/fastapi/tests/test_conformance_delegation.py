@@ -1,6 +1,6 @@
 from typing import Final
 
-from oaff.app.requests.conformance import Conformance
+from oaff.app.requests.conformance import Conformance as ConformanceRequest
 from oaff.fastapi.api.routes.conformance import PATH as ROOT_PATH
 from oaff.fastapi.tests import common_delegation as common
 
@@ -24,7 +24,7 @@ def test_basic_defaults(test_app):
     common.test_basic_defaults(
         test_app,
         endpoint_path,
-        Conformance,
+        ConformanceRequest,
         handler_calls,
     )
 

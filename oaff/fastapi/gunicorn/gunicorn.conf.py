@@ -2,7 +2,7 @@ import os
 
 cpu_limit = os.environ.get("API_CPU_LIMIT")
 if cpu_limit is None:
-    num_avail_cpus = len(os.sched_getaffinity(0))
+    num_avail_cpus = len(os.sched_getaffinity(0))  # type: ignore[attr-defined]
 else:
     try:
         num_avail_cpus = int(cpu_limit)
