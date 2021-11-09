@@ -26,9 +26,9 @@ def get_openapi_handler(app: FastAPI) -> Callable[[Request], VndResponse]:
         collection_items_bbox_param = list(
             filter(
                 lambda parameter: parameter["name"] == "bbox",
-                definition["paths"][f"{ROOT_PATH}/collections/{{collection_id}}/items"]["get"][
-                    "parameters"
-                ],
+                definition["paths"][f"{ROOT_PATH}/collections/{{collection_id}}/items"][
+                    "get"
+                ]["parameters"],
             )
         )[0]
         collection_items_bbox_param["schema"] = {
