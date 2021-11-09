@@ -88,7 +88,7 @@ During data interrogation oaff will identify all tables that can be served via i
 Follow the instructions [here](https://cite.opengeospatial.org/teamengine/) to execute CITE compliance tests against oaff. If executing tests in a Docker container against an API instance in a separate Docker container you may need to reference a special hostname. For example, to execute using Docker on MacOS:
 * `scripts/server && scripts/demo_data` to start the API containers
 * `docker run --rm -p 8081:8080 ogccite/ets-ogcapi-features10` to start the CITE testing container
-* Navigate browser to http://localhost:8081
+* Navigate browser to http://localhost:8081/teamengine
 * Login with `ogctest/ogctest`
 * Start a new test session
 * Provide http://docker.for.mac.localhost:8008 for the test URL

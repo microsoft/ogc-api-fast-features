@@ -3,6 +3,7 @@ from typing import Callable
 from fastapi.applications import FastAPI
 from fastapi.requests import Request
 
+from oaff.fastapi.api.settings import ROOT_PATH
 from oaff.fastapi.api.openapi.vnd_response import VndResponse
 
 
@@ -13,9 +14,10 @@ def get_openapi_handler(app: FastAPI) -> Callable[[Request], VndResponse]:
         definition = app.openapi().copy()
         for path in definition["paths"].values():
             if "get" in path:
-                for parameter in path["get"]["parameters"]:
-                    if "style" not in parameter:
-                        parameter["style"] = "form"
+                if "parameters" in path["get"]:
+                    for parameter in path["get"]["parameters"]:
+                        if "style" not in parameter:
+                            parameter["style"] = "form"
 
         # This API actually expects BBOX as a string but OGC spec requires
         # array with form-style, which is not possible in FastAPI.
@@ -24,7 +26,7 @@ def get_openapi_handler(app: FastAPI) -> Callable[[Request], VndResponse]:
         collection_items_bbox_param = list(
             filter(
                 lambda parameter: parameter["name"] == "bbox",
-                definition["paths"]["/collections/{collection_id}/items"]["get"][
+                definition["paths"][f"{ROOT_PATH}/collections/{{collection_id}}/items"]["get"][
                     "parameters"
                 ],
             )
